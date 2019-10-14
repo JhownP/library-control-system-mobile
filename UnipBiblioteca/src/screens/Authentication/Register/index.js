@@ -26,41 +26,48 @@ class Register extends Component {
             colorUsernameVerification: '#054774',
             colorEmailVerification: '#054774',
             colorPasswordVerification: '#054774',
-            colorRepeatPasswordVerification: '#054774',
-            colorPhoneVerification: '#054774',
+            colorRepeatPasswordVerification: '#054774'
         };
     }
     
     handleSubmit = async (object) => {
-        // if ((this.state.email != '' && this.state.email != undefined) &&
-        //     this.state.password != '' && this.state.password != undefined) {
-        //     this.setState({ progress: true });
-        //     api.post('/authenticate', {
-        //         email: object.state.email,
-        //         password: object.state.password
-        //     }).then((response) => {
-        //         if (response.data) {
-        //             console.log(response.data);
-        //             const { type, token } = response.data;  
-        //             AsyncStorage.setItem('token', token);
-        //             AsyncStorage.setItem('type', type);
-        //             this.props.navigation.navigate('Dashboard');
-        //         } else {
-        //             return this.setState({
-        //                 dialogNotificationLogin: true,
-        //                 titleNotificationLogin: 'Informações Incorretas',
-        //                 messageNotificationLogin: 'Email ou Senha Informados são Inválidos!'
-        //             });
-        //         }
-        //     }).catch((err) => {
-        //         console.error(err);
-        //     }).finally(() => {
-        //         this.setState({ progress: false })
-        //     });
-        // } else {
-        //     this.setState({ colorEmailVerification: this.verificationEmailText()});
-        //     this.setState({ colorPasswordVerification: this.verificationPasswordText()});
-        // }
+        if (this.state.username != '' && this.state.username != undefined &&
+            this.state.email != '' && this.state.email != undefined &&
+            this.state.password != '' && this.state.password != undefined &&
+            this.state.repeatPassword != '' && this.state.repeatPassword != undefined) {
+            
+            if (this.state.password === this.state.repeatPassword) {
+                this.setState({ progress: true });
+                api.post('/register', {
+                    username: object.state.username,
+                    email: object.state.email,
+                    password: object.state.password,
+                    phone: object.state.phone
+                }).then((response) => {
+                    if (response.data) {
+                        
+                    } else {
+                        
+                    }
+                }).catch((err) => {
+                    console.error(err);
+                }).finally(() => {
+                    this.setState({ progress: false })
+                });
+            } else {
+                this.setState({
+                    colorPasswordVerification: this.verificationPassword(this.state.password, this.setState.repeatPassword),
+                    colorRepeatPasswordVerification: this.verificationPassword(this.state.password, this.setState.repeatPassword)
+                });
+            }
+        } else {
+            this.setState({ 
+                colorUsernameVerification: this.verificationText(this.state.username),
+                colorEmailVerification: this.verificationText(this.state.email),
+                colorPasswordVerification: this.verificationText(this.state.password),
+                colorRepeatPasswordVerification: this.verificationText(this.state.repeatPassword) 
+            });
+        }
     }
 
     handleGoBackPage() {
@@ -101,6 +108,10 @@ class Register extends Component {
 
     verificationText(variable) {
         return variable === '' ? '#e74c3c' : '#054774';
+    }
+
+    verificationPassword(password, repeatPassword) {
+        return password != repeatPassword ? '#e74c3c' : '#054774';
     }
 
     render() {
@@ -186,7 +197,7 @@ class Register extends Component {
                     <ProgressDialog
                         visible={this.state.progress}
                         title='Aguarde'
-                        message='Efetuando Login ...'
+                        message='Registrando Usuário ...'
                         activityIndicatorColor={styles.button.backgroundColor}
                     />
 
