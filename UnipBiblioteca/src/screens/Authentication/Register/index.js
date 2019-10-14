@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, AsyncStorage, KeyboardAvoidingView, Platform, Image, Text, TextInput, TouchableOpacity } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import { ConfirmDialog, ProgressDialog } from "react-native-simple-dialogs";
 
 import api from '../../../services/api';
 
@@ -9,7 +8,6 @@ import logo from '../../../assets/logo.png';
 import fundo from '../../../assets/Login/BackgroundLogin.jpg'
 
 import { styles } from './styles.js';
-import { ConfirmDialog, ProgressDialog } from "react-native-simple-dialogs";
 
 class Register extends Component {
 
@@ -177,9 +175,7 @@ class Register extends Component {
                             onChangeText={this.handlePhoneChange}
                             maxLength={20}
                         />
-
                         <TouchableOpacity onPress={() => this.handleSubmit(this)} style={styles.button}>
-                            <FontAwesomeIcon icon={ faCheck } />
                             <Text style={styles.buttonText}>Registrar</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => this.handleGoBackPage()} style={styles.buttonRegister}>

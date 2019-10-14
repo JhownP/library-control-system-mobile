@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { View, AsyncStorage, KeyboardAvoidingView, Platform, Image, Text, TextInput, TouchableOpacity } from 'react-native';
-
+import Icon from "react-native-vector-icons/FontAwesome5";
 import api from '../../../services/api';
-
 import logo from '../../../assets/logo.png';
 import fundo from '../../../assets/Login/BackgroundLogin.jpg'
-
 import { styles } from './styles.js';
 import { ConfirmDialog, ProgressDialog } from "react-native-simple-dialogs";
 
@@ -101,7 +99,7 @@ export default class Login extends Component {
                         <TextInput 
                             style={[styles.input, {borderColor: this.state.colorEmailVerification }]}
                             placeholder="Seu E-mail"
-                            placeholderTextColor="#999"
+                            placeholderTextColor="#054774"
                             keyboardType="email-address"
                             autoCapitalize="none"
                             autoCorrect={false}
@@ -114,7 +112,7 @@ export default class Login extends Component {
                         <TextInput 
                             style={[ styles.input, {borderColor: this.state.colorPasswordVerification }]}
                             placeholder="Sua Senha"
-                            placeholderTextColor="#999"
+                            placeholderTextColor="#054774"
                             autoCapitalize="none"
                             secureTextEntry={true}
                             autoCorrect={false}
@@ -123,12 +121,29 @@ export default class Login extends Component {
                             maxLength={60}
                         />
 
-                        <TouchableOpacity onPress={() => this.handleSubmit(this)} style={styles.button}>
-                            <Text style={styles.buttonText}>Entrar</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.handleRegister()} style={styles.buttonRegister}>
-                            <Text style={styles.buttonRegisterText}>Registrar</Text>
-                        </TouchableOpacity>
+                        <View style={styles.buttonGroup}>
+                            <TouchableOpacity onPress={() => this.handleRegister()} style={styles.buttonRegister}>
+                                <Text style={styles.buttonRegisterText}>
+                                    <Icon
+                                        name="user-plus"
+                                        size={20}
+                                        color="#054774"
+                                    />
+                                    &nbsp; Registrar
+                                </Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => this.handleSubmit(this)} style={styles.button}>
+                                <Text style={styles.buttonText}>
+                                    <Icon
+                                        name="arrow-right"
+                                        size={20}
+                                        color="#f3f3f3"
+                                    />
+                                    &nbsp; Entrar
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
 
                     <ProgressDialog
