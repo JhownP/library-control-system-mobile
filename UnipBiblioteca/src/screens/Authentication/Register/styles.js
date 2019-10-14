@@ -41,7 +41,9 @@ export const styles = StyleSheet.create({
     },
 
     button: {
-        height: 42,
+        height: 40,
+        width: 170,
+        marginLeft: 11,
         backgroundColor: '#054774',
         justifyContent: 'center',
         alignItems: 'center',
@@ -55,11 +57,11 @@ export const styles = StyleSheet.create({
     },
 
     buttonRegister: {
-        marginTop: 20,
-        height: 42,
+        height: 40,
+        width: 170,
         backgroundColor: '#f3f3f3',
         borderColor: '#054774',
-        borderWidth: 2,
+        borderWidth: 1,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
@@ -69,5 +71,13 @@ export const styles = StyleSheet.create({
         color: '#054774',
         fontWeight: 'bold',
         fontSize: 16,
+    },
+
+    buttonGroup: {
+        height: 50,
+        justifyContent: 'center',
+        flexDirection: 'row',
+        margin: 10,
+        marginTop: 25
     }
 });

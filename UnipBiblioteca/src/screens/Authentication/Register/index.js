@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { View, AsyncStorage, KeyboardAvoidingView, Platform, Image, Text, TextInput, TouchableOpacity } from 'react-native';
 import { ConfirmDialog, ProgressDialog } from "react-native-simple-dialogs";
-
+import Icon from "react-native-vector-icons/FontAwesome5";
 import api from '../../../services/api';
-
 import logo from '../../../assets/logo.png';
 import fundo from '../../../assets/Login/BackgroundLogin.jpg'
-
 import { styles } from './styles.js';
 
 class Register extends Component {
@@ -45,9 +43,13 @@ class Register extends Component {
                     phone: object.state.phone
                 }).then((response) => {
                     if (response.data) {
-                        
+                        return this.props.navigation.navigate('Login');
                     } else {
-                        
+                        return this.setState({
+                            dialogNotificationLogin: true,
+                            titleNotificationLogin: 'Informações Incorretas',
+                            messageNotificationLogin: 'Verifique os Dados e Tente Novamente!'
+                        });
                     }
                 }).catch((err) => {
                     console.error(err);
@@ -125,11 +127,9 @@ class Register extends Component {
                         <Text style={styles.label}>USUÁRIO * </Text>
                         <TextInput 
                             style={[styles.input, {borderColor: this.state.colorUsernameVerification }]}
-                            placeholder="Seu E-mail"
+                            placeholder="Seu Usuário"
                             placeholderTextColor="#054774"
-                            keyboardType="default"
                             autoCapitalize="words"
-                            autoCorrect={false}
                             value={this.state.username}
                             onChangeText={this.handleUsernameChange}
                             maxLength={200}
@@ -186,12 +186,29 @@ class Register extends Component {
                             onChangeText={this.handlePhoneChange}
                             maxLength={20}
                         />
-                        <TouchableOpacity onPress={() => this.handleSubmit(this)} style={styles.button}>
-                            <Text style={styles.buttonText}>Registrar</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.handleGoBackPage()} style={styles.buttonRegister}>
-                            <Text style={styles.buttonRegisterText}>Voltar</Text>
-                        </TouchableOpacity>
+
+                        <View style={styles.buttonGroup}>
+                            <TouchableOpacity onPress={() => this.handleGoBackPage()} style={styles.buttonRegister}>
+                                <Text style={styles.buttonRegisterText}>
+                                    <Icon
+                                        name="undo-alt"
+                                        size={20}
+                                        color="#054774"
+                                    />
+                                    &nbsp; Voltar
+                                </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => this.handleSubmit(this)} style={styles.button}>
+                                <Text style={styles.buttonText}>
+                                    <Icon
+                                        name="user-plus"
+                                        size={20}
+                                        color="#f3f3f3"
+                                    />
+                                    &nbsp; Registrar
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
 
                     <ProgressDialog
