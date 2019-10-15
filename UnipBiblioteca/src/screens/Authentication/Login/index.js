@@ -22,16 +22,6 @@ export default class Login extends Component {
             password: '',
         };
     }
-    
-    //Tem que adicionar dentro do preloading
-    // async UNSAFE_componentWillMount(){
-    //     await AsyncStorage.getItem('token').then(token => {
-    //         if (token) {
-    //             console.log(token)
-    //             this.props.navigation.navigate('Dashboard');
-    //         }
-    //     })
-    // }
 
     handleSubmit = async (object) => {
         if ((this.state.email != '' && this.state.email != undefined) &&
@@ -42,7 +32,6 @@ export default class Login extends Component {
                 password: object.state.password
             }).then((response) => {
                 if (response.data) {
-                    console.log(response.data);
                     const { type, token } = response.data;  
                     AsyncStorage.setItem('token', token);
                     AsyncStorage.setItem('type', type);
